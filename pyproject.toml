@@ -1,0 +1,93 @@
+[project]
+name = "pydantic-ai-model-selection"
+version = "0.1.0"
+description = "Per-request model selection, a feature for pydantic-ai-app-factory"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "aiXbrain GmbH", email = "dev@aixbrain.de" }]
+keywords = ["pydantic-ai", "agent", "fastapi", "model-selection", "app-factory", "feature"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+dependencies = [
+    # The factory's own floor; the router is mounted through its `include_router`.
+    "fastapi>=0.137",
+    # `_capability.py` builds the request model with `create_model`.
+    "pydantic>=2",
+    # `AbstractCapability.get_model` and `ModelSelectionContext` exist from 2.16 on.
+    "pydantic-ai-slim>=2.16,<3",
+    # The Feature contract this package implements; 0.x, so a minor may change it.
+    "pydantic-ai-app-factory>=0.1,<0.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/aixbrain/pydantic-ai-model-selection"
+Repository = "https://github.com/aixbrain/pydantic-ai-model-selection"
+Issues = "https://github.com/aixbrain/pydantic-ai-model-selection/issues"
+
+[dependency-groups]
+dev = [
+    "anyio>=4",  # its pytest plugin runs the async tests
+    "httpx>=0.27",  # starlette's TestClient
+    "pydantic-ai-slim[openai]>=2.16,<3",  # the missing-key test resolves an `openai:` model string
+    "pytest>=9",
+    "pytest-cov>=7",
+    "pyright>=1.1.411",
+    "ruff>=0.16",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pydantic_ai_model_selection"]
+
+# An allow-list, so a local build ships only tracked sources, never untracked files in the checkout.
+[tool.hatch.build.targets.sdist]
+include = ["pydantic_ai_model_selection", "tests", "docs/*.md"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C901"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.pyright]
+include = ["pydantic_ai_model_selection", "tests"]
+pythonVersion = "3.11"
+typeCheckingMode = "strict"
+reportUnknownMemberType = false
+reportUnknownArgumentType = false
+reportUnknownVariableType = false
+reportMissingTypeStubs = false
+# Redundant with the 100% coverage gate (a truly unused function stays uncovered) and a false
+# positive on framework-registered route handlers.
+reportUnusedFunction = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["pydantic_ai_model_selection"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
