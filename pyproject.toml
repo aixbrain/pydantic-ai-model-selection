@@ -26,7 +26,7 @@ dependencies = [
     # `AbstractCapability.get_model` and `ModelSelectionContext` exist from 2.16 on.
     "pydantic-ai-slim>=2.16,<3",
     # The Feature contract this package implements; 0.x, so a minor may change it.
-    "pydantic-ai-app-factory>=0.1,<0.2",
+    "pydantic-ai-app-factory>=0.4,<0.5",
 ]
 
 [project.urls]
