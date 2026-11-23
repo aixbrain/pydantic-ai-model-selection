@@ -29,11 +29,11 @@ def auth() -> UserContext:
 
 selection = ModelSelection(
     options={
-        'fast': ModelOption('openai:gpt-5-mini', label='Fast'),
-        'thorough': ModelOption('openai:gpt-5'),
+        'fast': ModelOption('openai:gpt-6-luna', label='Fast'),
+        'thorough': ModelOption('openai:gpt-6.1-sol'),
     },
 )
-agent = create_agent('openai:gpt-5-mini', instructions='You are a helpful assistant.')
+agent = create_agent('openai:gpt-6-luna', instructions='You are a helpful assistant.')
 app = create_agent_app(agent, auth=auth, features=[selection])
 ```
 
