@@ -94,7 +94,7 @@ def test_a_missing_provider_key_fails_startup_not_the_first_request(monkeypatch:
     monkeypatch.delenv('OPENAI_API_KEY', raising=False)
 
     with pytest.raises(UserError):
-        ModelSelection(options={'gpt': ModelOption('openai:gpt-5-mini', label='GPT')})
+        ModelSelection(options={'gpt': ModelOption('openai:gpt-6-luna', label='GPT')})
 
 
 def test_the_feature_is_named_and_exposes_its_keys_on_config() -> None:

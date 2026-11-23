@@ -23,10 +23,10 @@ dependencies = [
     "fastapi>=0.137",
     # `_capability.py` builds the request model with `create_model`.
     "pydantic>=2",
-    # `AbstractCapability.get_model` and `ModelSelectionContext` exist from 2.16 on.
-    "pydantic-ai-slim>=2.16,<3",
+    # The floor pydantic-ai-app-factory itself requires; a lower one could never be installed.
+    "pydantic-ai-slim>=2.62,<3",
     # The Feature contract this package implements; 0.x, so a minor may change it.
-    "pydantic-ai-app-factory>=0.4,<0.5",
+    "pydantic-ai-app-factory>=0.5,<0.6",
 ]
 
 [project.urls]
@@ -38,7 +38,7 @@ Issues = "https://github.com/aixbrain/pydantic-ai-model-selection/issues"
 dev = [
     "anyio>=4",  # its pytest plugin runs the async tests
     "httpx>=0.27",  # starlette's TestClient
-    "pydantic-ai-slim[openai]>=2.16,<3",  # the missing-key test resolves an `openai:` model string
+    "pydantic-ai-slim[openai]>=2.62,<3",  # the missing-key test resolves an `openai:` model string
     "pytest>=9",
     "pytest-cov>=7",
     "pyright>=1.1.411",
