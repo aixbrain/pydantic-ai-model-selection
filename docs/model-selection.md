@@ -18,8 +18,8 @@ from pydantic_ai.providers.openai import OpenAIProvider
 
 selection = ModelSelection(
     options={
-        'fast': ModelOption('openai:gpt-5-mini'),
-        'gemini': ModelOption('google:gemini-3.5-flash'),
+        'fast': ModelOption('openai:gpt-6-luna'),
+        'gemini': ModelOption('google:gemini-3.8-flash'),
         'gateway-llama': ModelOption(
             OpenAIChatModel('llama-4', provider=OpenAIProvider(base_url=GATEWAY_URL, api_key=GATEWAY_KEY)),
             label='Llama (gateway)',
@@ -60,8 +60,8 @@ options this caller may pick:
 
 ```json
 [
-  {"key": "fast", "label": "gpt-5-mini"},
-  {"key": "gemini", "label": "gemini-3.5-flash"},
+  {"key": "fast", "label": "gpt-6-luna"},
+  {"key": "gemini", "label": "gemini-3.8-flash"},
   {"key": "gateway-llama", "label": "Llama (gateway)"}
 ]
 ```
@@ -123,8 +123,8 @@ class MyDeps:
     extras: Mapping[str, Any] = field(default_factory=dict)
 
 
-models = {'fast': infer_model('openai:gpt-5-mini'), 'thorough': infer_model('openai:gpt-5')}
-agent = Agent('openai:gpt-5-mini', deps_type=MyDeps, capabilities=[ModelSelectionCapability[MyDeps](models=models)])
+models = {'fast': infer_model('openai:gpt-6-luna'), 'thorough': infer_model('openai:gpt-6.1-sol')}
+agent = Agent('openai:gpt-6-luna', deps_type=MyDeps, capabilities=[ModelSelectionCapability[MyDeps](models=models)])
 # inside an async function
 result = await agent.run('Summarize this.', deps=MyDeps(user=MyUser('u1'), extras={'model': 'thorough'}))
 
