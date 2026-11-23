@@ -1,6 +1,6 @@
 [project]
 name = "pydantic-ai-model-selection"
-version = "0.1.0"
+version = "0.2.0"
 description = "Per-request model selection, a feature for pydantic-ai-app-factory"
 readme = "README.md"
 requires-python = ">=3.11"
